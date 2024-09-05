@@ -4,13 +4,13 @@ from sqlalchemy.orm import Session
 from ..schemas import tasks as schemas
 from ..crud import tasks as crud
 from ..dependencies import get_db
-from ..utils.redis_cache import redis_cache, CACHE_TTL
+from ..utils.redis_cache import redis_cache, CACHE_TTL, delete_get_all_cache
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 @router.post("/", response_model=schemas.Task)
 def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
-    redis_cache.delete("tasks:all")
+    delete_get_all_cache(redis_cache, 'tasks')
     return crud.create_task(db=db, task=task)
 
 @router.put("/{task_id}", response_model=schemas.Task)
@@ -21,7 +21,7 @@ def update_task(task_id: int, task: schemas.TaskUpdate, db: Session = Depends(ge
     
     task_schema = schemas.Task.model_validate(db_task)
     redis_cache.set(f"task:{task_id}", json.dumps(task_schema.model_dump()), ex=CACHE_TTL)
-    redis_cache.delete("tasks:all")
+    delete_get_all_cache(redis_cache, 'tasks')
     return task_schema
 
 @router.patch("/{task_id}", response_model=schemas.Task)
@@ -32,7 +32,7 @@ def partial_update_task(task_id: int, task: schemas.TaskPartialUpdate, db: Sessi
     
     task_schema = schemas.Task.model_validate(db_task)
     redis_cache.set(f"task:{task_id}", json.dumps(task_schema.model_dump()), ex=CACHE_TTL)
-    redis_cache.delete("tasks:all")
+    delete_get_all_cache(redis_cache, 'tasks')
     return task_schema
 
 @router.get("/{task_id}", response_model=schemas.Task)
@@ -69,4 +69,4 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Task not found")
     
     redis_cache.delete(f"task:{task_id}")
-    redis_cache.delete("tasks:all")
+    delete_get_all_cache(redis_cache, 'tasks')
