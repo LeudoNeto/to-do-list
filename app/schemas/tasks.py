@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 class TaskBase(BaseModel):
     title: str
@@ -17,5 +17,4 @@ class Task(TaskBase):
     id: int
     completed: bool
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
