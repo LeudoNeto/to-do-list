@@ -82,3 +82,13 @@ def test_delete_task(client):
 
     response = client.get(f"/tasks/{task_id}")
     assert response.status_code == 404
+
+def test_cache_integration(client):
+    response = client.post("/tasks/", json={"title": "Integration Task", "description": "Integration Description"})
+    task_id = response.json()["id"]
+
+    response = client.get(f"/tasks/{task_id}")
+    assert response.status_code == 200
+
+    response = client.get(f"/tasks/{task_id}")
+    assert response.status_code == 200
