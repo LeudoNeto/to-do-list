@@ -3,9 +3,11 @@ import os
 
 CACHE_TTL = 60 * 5
 
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
-REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
-REDIS_DB = int(os.getenv("REDIS_DB", 0))
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
+
+REDIS_HOST = REDIS_URL.split("//")[1].split(":")[0]
+REDIS_PORT = REDIS_URL.split(":")[2].split("/")[0]
+REDIS_DB = REDIS_URL.split("/")[3]
 
 redis_cache = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 
