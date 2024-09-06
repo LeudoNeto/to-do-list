@@ -12,6 +12,10 @@ A arquitetura do projeto é baseada em uma abordagem moderna e escalável. O bac
 
 A CI/CD do projeto utiliza o GitHub Actions para automatizar o processo de teste e verificação de estilo do código. A configuração do GitHub Actions garante que, a cada push para o repositório, os testes unitários e de integração sejam executados, e que o código seja verificado quanto ao estilo utilizando o Flake8 para garantir a conformidade com o padrão PEP 8.
 
+## Diagrama de Arquitetura do Sistema
+
+![Diagrama de Arquitetura do Sistema](docs/diagrama_arquitetura.png)
+
 # Instalação
 
 ## 1. Instalação do Git
