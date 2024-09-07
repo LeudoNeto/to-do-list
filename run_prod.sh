@@ -6,3 +6,5 @@ kubectl apply -f k8s/fastapi-deployment.yaml
 kubectl apply -f k8s/db-service.yaml
 kubectl apply -f k8s/redis-service.yaml
 kubectl apply -f k8s/fastapi-service.yaml
+kubectl apply -f k8s/pv.yaml
+kubectl apply -f k8s/pvc.yaml
