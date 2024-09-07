@@ -8,7 +8,7 @@ Este projeto FastAPI é voltado para um teste técnico da Montseguro Corretora e
 
 # Arquitetura
 
-A arquitetura do projeto é baseada em uma abordagem moderna e escalável. O back-end é desenvolvido com FastAPI, proporcionando uma API de alto desempenho e rápida. O Redis é utilizado para caching de requisições, otimizando a performance e reduzindo o tempo de resposta. A aplicação é conteinerizada com Docker, permitindo uma implantação consistente em diferentes ambientes, e gerenciada com Docker Compose durante o desenvolvimento para facilitar a configuração e execução de múltiplos containers. Para a orquestração em produção, utiliza-se Kubernetes, garantindo escalabilidade e gerenciamento eficiente dos containers. O PostgreSQL é executado localmente em um container Docker, oferecendo uma base de dados robusta e confiável. Para deploy do microsserviço foi utilizada uma VM do Google Cloud Platform.
+A arquitetura do projeto é baseada em uma abordagem moderna e escalável. O back-end é desenvolvido com FastAPI, proporcionando uma API de alto desempenho e rápida. O Redis é utilizado para caching de requisições, otimizando a performance e reduzindo o tempo de resposta. A aplicação é conteinerizada com Docker, permitindo uma implantação consistente em diferentes ambientes, e gerenciada com Docker Compose durante o desenvolvimento para facilitar a configuração e execução de múltiplos containers. Para a orquestração em produção, utiliza-se Kubernetes, garantindo escalabilidade e gerenciamento eficiente dos containers. O PostgreSQL é executado localmente em um container Docker, oferecendo uma base de dados robusta e confiável. Para deploy do microsserviço foi utilizada uma VM do Google Cloud Platform, que está rodando o sistema operacional Debian Linux.
 
 A CI/CD do projeto utiliza o GitHub Actions para automatizar o processo de teste e verificação de estilo do código. A configuração do GitHub Actions garante que, a cada push para o repositório, os testes unitários e de integração sejam executados, e que o código seja verificado quanto ao estilo utilizando o Flake8 para garantir a conformidade com o padrão PEP 8.
 
@@ -17,6 +17,8 @@ A CI/CD do projeto utiliza o GitHub Actions para automatizar o processo de teste
 ![Diagrama de Arquitetura do Sistema](docs/diagrama_arquitetura.png)
 
 # Instalação
+
+Considerando o sistema operacional Debian Linux.
 
 ## 1. Instalação do Git
 
@@ -79,6 +81,8 @@ sudo mv kubectl /usr/local/bin/
 ```bash
 ./run_dev.sh
 ```
+
+Acesse o serviço em [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## 2. Para Produção (com Kubernetes)
 
